@@ -1,0 +1,9 @@
+.container {
+    margin: 60px 0px 5px 30px;
+}
+.table {
+    width: 1160px;
+}
+td, th {
+    text-align: center;
+}

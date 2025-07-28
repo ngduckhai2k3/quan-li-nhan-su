@@ -3,6 +3,12 @@
         if(!isset($_SESSION["username"])){
         header('location: login.php');
         }
+        include('connect.php');
+        $username = $_SESSION["username"];
+        $sql = "SELECT nv.anh_dai_dien FROM nhan_vien nv JOIN nguoi_dung nd ON nv.id = nhan_vien_id WHERE nd.ten_dang_nhap = '$username'";
+        $result = mysqli_query($conn, $sql);
+        $row = mysqli_fetch_assoc($result);
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -20,7 +26,6 @@
 </head>
 <style>
     body {
-        background-color: gray;
         width: 100%;
         height: 100%;
     }
@@ -30,7 +35,7 @@
     }
 
     .navbar-nav {
-        margin: 5px 0px 5px 500px;
+        margin: 5px 0px 5px 120px;
     }
 
     .navbar-nav li {
@@ -38,10 +43,6 @@
         margin-right: 15px;
     }
 
-
-    .container {
-        margin: 10px 0px 0px 10px;
-    }
 </style>
 
 <body>
@@ -49,6 +50,12 @@
         <img class="navbar-brand" src="OIP.jpg" style="width:60px; margin-top: 0; margin-bottom:0;">
         <div class="navbar-nav">
             <ul class="navbar-nav">
+                <li class="nav-item" style="margin-right: 20px; width: 100vh">
+                    <form class="d-flex" role="search">
+                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="search"/>
+                        <button class="btn btn-outline-success" type="submit">Search</button>
+                    </form>
+                </li>
                 <li class="nav-item">
                     <i class="fa fa-bell-o" aria-hidden="true"></i>
                 </li>
@@ -57,72 +64,81 @@
                 </li>
                 <li class="nav-item">
                     <div class="image_user">
-                        <img src="#" style="margin-right: 20px; border-radius: 50%;">
-                        <span>Name User</span>
+                        <img src="<?php echo $row['anh_dai_dien']; ?>" style="width: 20px; margin-right: 10px; border-radius: 50%;">
+                        <span><?php echo $username; ?></span>
                     </div>
                 </li>
                 <li class="nav-item">
                     <div>
-                        <i class="fa fa-sign-in" aria-hidden="true" style="margin-right: 5px;"></i>
+                        <i class="fa fa-sign-in" aria-hidden="true" style="margin-right: 5px; margin-left: 10px"></i>
                         <a href="?page_layout=dangxuat" style="color:black; text-decoration:none;">Đăng xuất</a>
                     </div>
                 </li>
             </ul>
         </div>
     </div>
-    <div class="d-flex" style="height: 100vh;border-bottom:1px solid black;">
-        <!-- Menu dọc -->
-        <ul class="nav flex-column bg-white p-3 bg-body-tertiary" style="width: 300px">
-            <li class="nav-item">
-                <a class="nav-link active text-black" href="#"><i class="fa fa-home" aria-hidden="true" style="margin-right: 10px;"></i>Trang chủ</a>
-            </li>
-            <li class="nav-item" style="margin-left: 15px;">
-                <a class="d-block text-black text-decoration-none" data-bs-toggle="collapse" href="#submenuNhanVien" role="button" aria-expanded="false" aria-controls="submenuNhanVien"><i class="fa fa-user" aria-hidden="true" style="margin-right: 10px;"></i> Nhân viên
-                </a>
-                <div class="collapse ps-3" id="submenuNhanVien">
-                    <a class="d-block text-black text-decoration-none py-1" href="#">Phòng ban</a>
-                    <a class="d-block text-black text-decoration-none py-1" href="#">Chức vụ</a>
-                    <a class="d-block text-black text-decoration-none py-1" href="#">Trình độ</a>
-                    <a class="d-block text-black text-decoration-none py-1" href="#">Thêm mới nhân viên</a>
-                    <a class="d-block text-black text-decoration-none py-1" href="?page_layout=dsnv">Danh sách nhân viên</a>
-                </div>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link text-black" href="#"><i class="fa fa-star" aria-hidden="true" style="margin-right: 10px;"></i>Khen thưởng - Kỷ luật</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link text-black" href="#"><i class="fa fa-money" aria-hidden="true" style="margin-right: 10px;"></i>Bảng lương</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link text-black" href="#"><i class="fa fa-check-square-o" aria-hidden="true" style="margin-right: 10px;"></i>Bảng chấm công</a>
-            </li>
-        </ul>
+    <div class="d-flex" style="height: 80vh;border-bottom:1px solid black;">
+        <div style="width: 20%">
+              <!-- Menu dọc -->
+            <ul class="nav flex-column bg-white p-3 bg-body-tertiary" style="width: 270px; height: 100%;">
+                <li class="nav-item">
+                    <a class="nav-link active text-black" href="#"><i class="fa fa-home" aria-hidden="true" style="margin-right: 10px;"></i>Trang chủ</a>
+                </li>
+                <li class="nav-item" style="margin-left: 15px;">
+                    <a class="d-block text-black text-decoration-none" data-bs-toggle="collapse" href="#submenuNhanVien" role="button" aria-expanded="false" aria-controls="submenuNhanVien"><i class="fa fa-user" aria-hidden="true" style="margin-right: 10px;"></i> Nhân viên
+                    </a>
+                    <div class="collapse ps-3" id="submenuNhanVien">
+                        <a class="d-block text-black text-decoration-none py-1" href="#">Thông tin cá nhân</a>
+                        <a class="d-block text-black text-decoration-none py-1" href="#">Phòng ban</a>
+                        <a class="d-block text-black text-decoration-none py-1" href="?page_layout=dsnv">Danh sách nhân viên</a>
+                        <a class="d-block text-black text-decoration-none py-1" href="?page_layout=themnv">Thêm mới nhân viên</a>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-black" href="#"><i class="fa fa-star" aria-hidden="true" style="margin-right: 10px;"></i>Khen thưởng - Kỷ luật</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-black" href="#"><i class="fa fa-money" aria-hidden="true" style="margin-right: 10px;"></i>Bảng lương</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-black" href="?page_layout=bcc"><i class="fa fa-check-square-o" aria-hidden="true" style="margin-right: 10px;"></i>Bảng chấm công</a>
+                </li>
+            </ul>
+        </div>
+        <div style="width: 80%; overflow-x:auto">
+            <?php
+                if(isset($_GET['page_layout'])) {
+                    switch($_GET['page_layout']) {
+                        case 'dsnv':
+                            include('dsnv.php');
+                            break;
+                        case 'ttnv':
+                            include('ttnv.php');
+                            break;
+                        case 'themnv':
+                            include('themnv.php');
+                            break;
+                        case 'capnhatttnv':
+                            include('capnhatttnv.php');
+                            break;
+                        case 'xulyxoa':
+                            include('xulyxoa.php');
+                            break;
+                        case 'bcc':
+                            include('bcc.php');
+                            break;
+                        case 'dangxuat':
+                            session_destroy();
+                            session_unset();
+                            header('location: login.php');
+                            break;
+                    }
+                }
+            ?>
+        </div>
 
         
     </div>
 </body>
 
 </html>
-<?php
-    if(isset($_GET['page_layout'])) {
-        switch($_GET['page_layout']) {
-            case 'dsnv':
-                include('dsnv.php');
-                break;
-            case 'ttnv':
-                include('ttnv.php');
-                break;
-            case 'capnhatttnv':
-                include('capnhatttnv.php');
-                break;
-            case 'xulyxoa':
-                include('xulyxoa.php');
-                break;
-            case 'dangxuat':
-                session_destroy();
-                session_unset();
-                header('location: login.php');
-                break;
-        }
-    }
-?>
