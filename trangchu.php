@@ -80,7 +80,7 @@
     <div class="d-flex" style="height: 80vh;border-bottom:1px solid black;">
         <div style="width: 20%">
               <!-- Menu dọc -->
-            <ul class="nav flex-column bg-white p-3 bg-body-tertiary" style="width: 270px; height: 100%;">
+            <ul class="nav flex-column bg-white p-3 bg-body-tertiary" style="width: 250px; height: 100%;">
                 <li class="nav-item">
                     <a class="nav-link active text-black" href="#"><i class="fa fa-home" aria-hidden="true" style="margin-right: 10px;"></i>Trang chủ</a>
                 </li>

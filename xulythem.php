@@ -64,7 +64,7 @@
                 $sql = "INSERT INTO `nhan_vien`(`ho_ten`, `ngay_sinh`, `gioi_tinh`, `email`, `sdt`, `phong_ban_id`, `chuc_vu_id`,`anh_dai_dien`) VALUES ('$hoten','$ngaysinh','$gioitinh', '$email', '$sdt', '$phongbanid', '$chucvuid', '$target_file')";
                 // echo $sql;
                 mysqli_query($conn, $sql);
-                header('location: trangchu.php?page_layout=trangchu');
+                header('location: trangchu.php?page_layout=dsnv');
             }
         
     }

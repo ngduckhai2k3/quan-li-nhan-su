@@ -54,8 +54,8 @@
                 <td><?php echo $row['ten_phong']; ?></td>
                 <td><?php echo $row['sdt']; ?></td>
                 <td>
-                    <a class='delete' href="?page_layout=xulyxoa&id=<?php echo $row['id']; ?>">Xoá</a>
                     <a class='update' href="?page_layout=capnhatttnv&id=<?php echo $row['id']; ?>">Cập nhật</a>
+                    <a class='delete' href="?page_layout=xulyxoa&id=<?php echo $row['id']; ?>">Xoá</a>
                 </td>
             </tr>
             <?php
