@@ -10,7 +10,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q"
         crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="css\style.css">
 </head>
 <style>
     .delete {
@@ -27,7 +27,7 @@
 <body>
     <div class="container">
     <caption>Danh sách nhân viên</caption>
-    <table class="table table-bordered table-hover border-primary">
+    <table class="table table-bordered table-hover">
         <tr>
             <th>STT</th>
             <th>Họ và tên</th>
