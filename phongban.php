@@ -6,39 +6,31 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-<?php
-include('connect.php');
-$selected_pb = isset($_GET['phong_ban']) ? $_GET['phong_ban'] : '';
-
-// Lấy danh sách phòng ban
-$phongban_query = "SELECT * FROM phong_ban";
-$phongban_result = mysqli_query($conn, $phongban_query);
-
-// Truy vấn nhân viên
-if ($selected_pb != '') {
-    $sql = "SELECT nv.*, cv.ten_chuc_vu
-            FROM nhan_vien nv
-            LEFT JOIN chuc_vu cv ON nv.chuc_vu_id = cv.id
-            WHERE nv.phong_ban_id = '$selected_pb'";
-} else {
-    $sql = "SELECT nv.*, cv.ten_chuc_vu
-            FROM nhan_vien nv
-            LEFT JOIN chuc_vu cv ON nv.chuc_vu_id = cv.id";
-}
-$result = mysqli_query($conn, $sql);
-?>
     <div class="container">
+    <?php
+    include('connect.php');
+    $selected_pb = isset($_GET['phong_ban']) ? $_GET['phong_ban'] : '';
+    if ($selected_pb != '') {
+        $sql = "SELECT * FROM nhan_vien WHERE phong_ban = '$selected_pb'";
+    } else {
+        $sql = "SELECT * FROM nhan_vien";
+    }
+    $result = mysqli_query($conn, $sql);
+    ?>
         <div class="chonpb">
             <form method="GET" action="">
-                <label for="phong_ban">Chọn phòng ban:</label>
-                <select class="form-select" aria-label="Default select example" name="phong_ban" id="phong_ban" style="width: 300px;">
-                    <option value="">-- Tất cả --</option>
-                    <?php while($pb = mysqli_fetch_assoc($phongban_result)): ?>
-                        <option value="<?= $pb['id'] ?>" <?= $selected_pb == $pb['id'] ? 'selected' : '' ?>>
-                            <?= $pb['ten_phong'] ?>
-                        </option>
-                    <?php endwhile; ?>
-                </select>
+                <div style="margin-right: 20px;">
+                        <p style="margin-left: 20px">Phòng ban:</p>
+                        <select name="phong_ban" class="form-select" onchange="this.form.submit()" required>
+                            <option value="">-- Chọn phòng ban --</option>
+                            <option value="Kỹ thuật" <?= $selected_pb == "Kỹ thuật" ? "selected" : "" ?>>Kỹ thuật</option>
+                            <option value="Hành chính - Nhân sự" <?= $selected_pb == "Hành chính - Nhân sự" ? "selected" : "" ?>>Hành chính - Nhân sự</option>
+                            <option value="Kế toán" <?= $selected_pb == "Kế toán" ? "selected" : "" ?>>Kế toán</option>
+                            <option value="Kinh doanh" <?= $selected_pb == "Kinh doanh" ? "selected" : "" ?>>Kinh doanh</option>
+                            <option value="Sản xuất" <?= $selected_pb == "Sản xuất" ? "selected" : "" ?>>Sản xuất</option>
+                            <option value="Marketing" <?= $selected_pb == "Marketing" ? "selected" : "" ?>>Marketing</option>
+                    </select>
+                </div>
             </form>
         </div>
         <div class="table-responsive" style="margin-top: 20px;">
@@ -56,7 +48,7 @@ $result = mysqli_query($conn, $sql);
                 <?php while($nv = mysqli_fetch_assoc($result)): ?>
                 <tr>
                     <td><?= $nv['ho_ten'] ?></td>
-                    <td><?= $nv['ten_chuc_vu'] ?></td>
+                    <td><?= $nv['chuc_vu'] ?></td>
                     <td><?= date('d/m/Y', strtotime($nv['ngay_sinh'])) ?></td>
                     <td><?= $nv['gioi_tinh'] ?></td>
                     <td><?= $nv['sdt'] ?></td>

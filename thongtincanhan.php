@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="css\style.css">
+    <link rel="stylesheet" href="css/style.css">
     <style>
         .info {
             display: flex;
@@ -18,6 +18,12 @@
             margin-left: 20px;
             margin-top: 50px;
         }
+        .caption {
+            font-weight: bold;
+            text-align: center;
+            font-size: 24px;
+            padding-top:10px;
+        }
     </style>
 </head>
 <body>
@@ -27,19 +33,15 @@
     $default_id = '1';  
     $id = isset($_GET['idnv']) ? $_GET['idnv'] : $default_id;
     if (isset($_GET['idnv'])) {
-        $sql = "SELECT nv.*, cv.ten_chuc_vu, pb.ten_phong
+        $sql = "SELECT nv.*
             FROM nhan_vien nv
-            LEFT JOIN chuc_vu cv ON nv.chuc_vu_id = cv.id
-            LEFT JOIN phong_ban pb ON nv.phong_ban_id = pb.id
             WHERE nv.id = '$id'";
         $result = mysqli_query($conn, $sql);
         $row = mysqli_fetch_assoc($result); 
         header('location: trangchu.php?page_layout=ttcn'); 
         }
-        $sql = "SELECT nv.*, cv.ten_chuc_vu, pb.ten_phong
+        $sql = "SELECT nv.*
             FROM nhan_vien nv
-            LEFT JOIN chuc_vu cv ON nv.chuc_vu_id = cv.id
-            LEFT JOIN phong_ban pb ON nv.phong_ban_id = pb.id
             WHERE nv.id = '$id'";
         $result = mysqli_query($conn, $sql);
         $row = mysqli_fetch_assoc($result); 
@@ -50,13 +52,13 @@
                 <button class="btn btn-outline-secondary" type="submit" id="button-addon2">Tìm kiếm</button>
             </div>
         </form>
-        <div style="border: 1px solid #ccc; padding: 20px;border-radius: 5px;width: 80%;">
+        <div style="border: 3px solid #ccc; padding: 20px;border-radius: 5px;width: 80%;">
             <div class="title">
-                <p style="font-size: 20px">Thông tin cá nhân</p>
+                <p class="caption" style="font-size: 20px">Thông tin cá nhân</p>
             </div>
             <div class="info">
                 <div class="avatar" style="margin-right: 80px;"> 
-                    <p>Ảnh đại diện</p>
+                    <span>Ảnh đại diện</span> <br>
                     <img src="<?php echo $row['anh_dai_dien']; ?>" class="img-thumbnail" alt="Avatar" style="width: 300px">
                 </div>
                 <div class="noidung">
@@ -67,8 +69,8 @@
                 </div>
                 <div class="noidung">
                     <span>Email:</span> <?php echo $row['email']; ?> <br>
-                    <span>Chức vụ:</span> <?php echo $row['ten_chuc_vu']; ?> <br>
-                    <span>Phòng ban:</span> <?php echo $row['ten_phong']; ?>
+                    <span>Chức vụ:</span> <?php echo $row['chuc_vu']; ?> <br>
+                    <span>Phòng ban:</span> <?php echo $row['phong_ban']; ?>
                 </div>
             </div>
         </div>

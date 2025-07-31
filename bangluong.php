@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Bảng lương</title>
-    <link rel="stylesheet" href="css\style.css">
+    <link rel="stylesheet" href="css/style.css">
     <style>
         .data {
             margin-top: 50px;
@@ -18,26 +18,16 @@
 <body>
     <?php
         include('connect.php');
-            $sql = "SELECT 
-                nv.ho_ten,
-                pb.ten_phong,
-                cv.ten_chuc_vu,
-                l.luong_co_ban,
-                l.phu_cap,
-                l.thuong,
-                l.ky_luat,
-                l.tong_luong,
+            $sql = "SELECT nv.ho_ten, nv.phong_ban, nv.chuc_vu, l.luong_co_ban, l.phu_cap, l.thuong, l.ky_luat, l.tong_luong,
                 tinh_cong_thang(nv.id, l.thang, l.nam) AS so_ngay_cong
                 FROM luong AS l
                 JOIN nhan_vien AS nv ON l.nhan_vien_id = nv.id
-                JOIN chuc_vu AS cv ON nv.chuc_vu_id = cv.id
-                JOIN phong_ban AS pb ON nv.phong_ban_id = pb.id
                 ORDER BY l.id";
 
         $result = mysqli_query($conn, $sql);
         ?>
     <div class="container">
-        <caption>Bảng lương</caption>
+        <div class="badge text-bg-secondary text-wrap" style="width: 10rem;font-weight: bold; font-size: 24px; padding:10px;">Bảng lương</div>
         <div class="data">
             <span>Tháng</span>
             <select>
@@ -63,7 +53,7 @@
             </select>
         </div>
         <div class="table">
-            <table class="table table-bordered table-hover">
+            <table class="table table-bordered table-hover" style="border:3px solid #ccc;">
                 <tr>
                     <th>Số thứ tự</th>
                     <th>Họ và tên</th>
@@ -81,7 +71,7 @@
                     echo "<tr>";
                         echo "<td>" . $stt++ . "</td>";
                         echo "<td>" . $row['ho_ten'] . "</td>";
-                        echo "<td>" . $row['ten_phong'] . " - " . $row['ten_chuc_vu'] . "</td>";
+                        echo "<td>" . $row['phong_ban'] . " - " . $row['chuc_vu'] . "</td>";
                         echo "<td>" . $row['so_ngay_cong'] . "</td>";
                         echo "<td>" . $row['luong_co_ban'] . "</td>";
                         echo "<td>" . $row['phu_cap'] . "</td>";
@@ -93,6 +83,7 @@
                 ?>
             <?php  ?>
             </table>
+        </div>
     </div>
 </body>
 </html>

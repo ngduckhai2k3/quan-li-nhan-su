@@ -6,16 +6,16 @@
         && !empty($_POST['gioi_tinh'])
         && !empty($_POST['email'])
         && !empty($_POST['sdt'])
-        && !empty($_POST['phong_ban_id'])
-        && !empty($_POST['chuc_vu_id'])
+        && !empty($_POST['phong_ban'])
+        && !empty($_POST['chuc_vu'])
     ){
         $hoten = $_POST['ho_ten'];
         $ngaysinh = $_POST['ngay_sinh'];
         $gioitinh = $_POST['gioi_tinh'];
         $email = $_POST['email'];
         $sdt = $_POST['sdt'];
-        $phongbanid = $_POST['phong_ban_id'];
-        $chucvuid = $_POST['chuc_vu_id'];
+        $phongban = $_POST['phong_ban'];
+        $chucvu = $_POST['chuc_vu'];
         
              #Bắt đầu xử lý thêm ảnh
             // Xử lý ảnh
@@ -61,7 +61,7 @@
             }
             else{
                 move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file);
-                $sql = "INSERT INTO `nhan_vien`(`ho_ten`, `ngay_sinh`, `gioi_tinh`, `email`, `sdt`, `phong_ban_id`, `chuc_vu_id`,`anh_dai_dien`) VALUES ('$hoten','$ngaysinh','$gioitinh', '$email', '$sdt', '$phongbanid', '$chucvuid', '$target_file')";
+                $sql = "INSERT INTO `nhan_vien`(`ho_ten`, `ngay_sinh`, `gioi_tinh`, `email`, `sdt`, `phong_ban`, `chuc_vu`,`anh_dai_dien`) VALUES ('$hoten','$ngaysinh','$gioitinh', '$email', '$sdt', '$phongban', '$chucvu', '$target_file')";
                 // echo $sql;
                 mysqli_query($conn, $sql);
                 header('location: trangchu.php?page_layout=dsnv');

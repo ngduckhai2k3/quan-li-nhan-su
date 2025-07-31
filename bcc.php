@@ -9,7 +9,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q"
         crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="css\style.css">
+    <link rel="stylesheet" href="css/style.css">
         <style>
             .data {
                 margin-top: 50px;
@@ -27,14 +27,12 @@
     $sql = "SELECT 
         nv.id AS ma_nv,
         nv.ho_ten,
-        pb.ten_phong AS phong_ban,
-        cv.ten_chuc_vu AS chuc_vu,
+        nv.phong_ban AS phong_ban,
+        nv.chuc_vu AS chuc_vu,
         COUNT(CASE WHEN cc.trang_thai = 'Đi làm' THEN 1 END) AS cong_thuc_te,
         COUNT(CASE WHEN cc.trang_thai = 'Nghỉ có phép' THEN 1 END) AS nghi_phep,
         COUNT(CASE WHEN cc.trang_thai = 'Nghỉ không phép' THEN 1 END) AS nghi_khong_phep
     FROM nhan_vien nv
-    LEFT JOIN phong_ban pb ON nv.phong_ban_id = pb.id
-    LEFT JOIN chuc_vu cv ON nv.chuc_vu_id = cv.id
     LEFT JOIN cham_cong cc ON nv.id = cc.nhan_vien_id 
         AND MONTH(cc.ngay) = 7 AND YEAR(cc.ngay) = 2025
     GROUP BY nv.id";
@@ -42,7 +40,7 @@
     $result = $conn->query($sql);
     ?>
     <div class="container">
-    <caption>Bảng chấm công</caption>
+    <div class="badge text-bg-secondary text-wrap" style="width: 15rem;font-weight: bold; font-size: 24px; padding:10px;">Bảng chấm công</div>
     <div class="data">
         <span>Tháng</span>
         <select>
@@ -68,7 +66,7 @@
         </select>
     </div>
     <div class="table">
-    <table class="table table-bordered table-hover">
+    <table class="table table-bordered table-hover" style="border:3px solid #ccc;">
         <tr>
             <th>STT</th>
             <th>Mã nhân viên</th>

@@ -9,6 +9,9 @@
         $result = mysqli_query($conn, $sql);
         $row = mysqli_fetch_assoc($result);
 ?>
+<?php
+ob_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -48,12 +51,13 @@
 
     .footer {
         position: fixed;
-        bottom: 0;
+        bottom: 0px;
         width: 100%;
         height: 12vh;
         background: linear-gradient(rgb(48, 48, 48));
         text-align: center;
         padding-top: 20px;
+        border-top: 1px solid grey;
     }
 
 </style>
@@ -90,31 +94,31 @@
             </ul>
         </div>
     </div>
-    <div class="d-flex" style="height: 80vh;border-bottom:1px solid black;">
+    <div class="d-flex" style="height: 80vh; overflow: hidden;">
         <div style="width: 20%">
               <!-- Menu dọc -->
-            <ul class="nav flex-column bg-white p-3 bg-body-tertiary" style="width: 250px; height: 100%;">
+            <ul class="nav flex-column bg-white p-3 bg-body-tertiary" style="width: 250px; height: 100%;background: linear-gradient(rgb(48, 48, 48));">
                 <li class="nav-item">
-                    <a class="nav-link active text-black" href="?page_layout=trangchu"><i class="fa fa-home" aria-hidden="true" style="margin-right: 10px;"></i>Trang chủ</a>
+                    <a class="nav-link active text-white" href="?page_layout=trangchu"><i class="fa fa-home" aria-hidden="true" style="margin-right: 10px;"></i>Trang chủ</a>
                 </li>
                 <li class="nav-item" style="margin-left: 15px;">
-                    <a class="d-block text-black text-decoration-none" data-bs-toggle="collapse" href="#submenuNhanVien" role="button" aria-expanded="false" aria-controls="submenuNhanVien"><i class="fa fa-user" aria-hidden="true" style="margin-right: 10px;"></i> Nhân viên
+                    <a class="d-block text-white text-decoration-none" data-bs-toggle="collapse" href="#submenuNhanVien" role="button" aria-expanded="false" aria-controls="submenuNhanVien"><i class="fa fa-user" aria-hidden="true" style="margin-right: 10px;"></i> Nhân viên
                     </a>
                     <div class="collapse ps-3" id="submenuNhanVien">
-                        <a class="d-block text-black text-decoration-none py-1" href="?page_layout=ttcn">Thông tin cá nhân</a>
-                        <a class="d-block text-black text-decoration-none py-1" href="?page_layout=phongban">Phòng ban</a>
-                        <a class="d-block text-black text-decoration-none py-1" href="?page_layout=dsnv">Danh sách nhân viên</a>
-                        <a class="d-block text-black text-decoration-none py-1" href="?page_layout=themnv">Thêm mới nhân viên</a>
+                        <a class="d-block text-white text-decoration-none py-1" href="?page_layout=ttcn">Thông tin cá nhân</a>
+                        <a class="d-block text-white text-decoration-none py-1" href="?page_layout=phongban">Phòng ban</a>
+                        <a class="d-block text-white text-decoration-none py-1" href="?page_layout=dsnv">Danh sách nhân viên</a>
+                        <a class="d-block text-white text-decoration-none py-1" href="?page_layout=themnv">Thêm mới nhân viên</a>
                     </div>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-black" href="#"><i class="fa fa-star" aria-hidden="true" style="margin-right: 10px;"></i>Khen thưởng - Kỷ luật</a>
+                    <a class="nav-link text-white" href="#"><i class="fa fa-star" aria-hidden="true" style="margin-right: 10px;"></i>Khen thưởng - Kỷ luật</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-black" href="?page_layout=bangluong"><i class="fa fa-money" aria-hidden="true" style="margin-right: 10px;"></i>Bảng lương</a>
+                    <a class="nav-link text-white" href="?page_layout=bangluong"><i class="fa fa-money" aria-hidden="true" style="margin-right: 10px;"></i>Bảng lương</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-black" href="?page_layout=bcc"><i class="fa fa-check-square-o" aria-hidden="true" style="margin-right: 10px;"></i>Bảng chấm công</a>
+                    <a class="nav-link text-white" href="?page_layout=bcc"><i class="fa fa-check-square-o" aria-hidden="true" style="margin-right: 10px;"></i>Bảng chấm công</a>
                 </li>
             </ul>
         </div>
@@ -162,3 +166,6 @@
 </body>
 
 </html>
+<?php
+ob_end_flush();
+?>

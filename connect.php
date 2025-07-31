@@ -3,7 +3,7 @@
     $servername = "localhost";
     $username = "root";
     $password = "";
-    $database = "qldn";
+    $database = "qlns";
     $port = 3306;
 
     // Create connection

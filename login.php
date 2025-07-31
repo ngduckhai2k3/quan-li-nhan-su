@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Trang Đăng Nhập</title>
-    <link rel="stylesheet" href="css\lg.css">
+    <link rel="stylesheet" href="css/lg.css">
 </head>
 
 <body>
