@@ -1,4 +1,7 @@
 <?php
+ob_start();
+?>
+<?php
     session_start();
         if(!isset($_SESSION["username"])){
         header('location: login.php');
@@ -8,9 +11,6 @@
         $sql = "SELECT nv.anh_dai_dien FROM nhan_vien nv JOIN nguoi_dung nd ON nv.id = nhan_vien_id WHERE nd.ten_dang_nhap = '$username'";
         $result = mysqli_query($conn, $sql);
         $row = mysqli_fetch_assoc($result);
-?>
-<?php
-ob_start();
 ?>
 <!DOCTYPE html>
 <html lang="en">

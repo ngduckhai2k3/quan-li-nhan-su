@@ -39,20 +39,13 @@
     $row = mysqli_num_rows($result) > 0 ? mysqli_fetch_assoc($result) : null;
         
     ?>  
-        <form method="GET" action="trangchu.php">
+        <form method="GET" action="">
+            <input type="hidden" name="page_layout" value="ttcn">
             <div class="input-group mb-3" style="width: 50%">
-                <input type="text" class="form-control" id="idInput" name="id" value="<?php echo isset($_GET['id']) ? htmlspecialchars($_GET['id']) : ''; ?>" placeholder="Vui lòng nhập ID nhân viên" aria-label="Recipient’s username" aria-describedby="button-addon2">
+                <input type="text" class="form-control" name="id" value="<?php echo isset($_GET['id']) ? htmlspecialchars($_GET['id']) : ''; ?>" placeholder="Vui lòng nhập ID nhân viên" aria-label="Recipient’s username" aria-describedby="button-addon2">
                 <button class="btn btn-outline-secondary" type="submit" id="button-addon2">Tìm kiếm</button>
             </div>
         </form>
-        <script>
-            window.onload = function () {
-                const input = document.getElementById('idInput');
-                if (!input.value) {
-                    input.value = '1';
-                }
-            }
-        </script>
         <div style="border: 3px solid #ccc; padding: 20px;border-radius: 5px;width: 80%;">
             <div class="title">
                 <p class="caption" style="font-size: 20px">Thông tin cá nhân</p>

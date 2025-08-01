@@ -19,6 +19,7 @@
     ?>
         <div class="chonpb">
             <form method="GET" action="">
+                <input type="hidden" name="page_layout" value="phongban">
                 <div style="margin-right: 20px;">
                         <div class="badge text-bg-secondary text-wrap" style="width: 10rem;font-weight: bold; font-size: 24px; padding:10px; margin-bottom: 10px">Phòng ban</div>
                         <select name="phong_ban" class="form-select" style="width:50%" onchange="this.form.submit()" required>
