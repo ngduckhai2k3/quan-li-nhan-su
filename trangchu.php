@@ -67,7 +67,7 @@ ob_start();
         <img class="navbar-brand" src="logo_cti\OIP.jpg" style="width:60px; margin-top: 0; margin-bottom:0;">
         <div class="navbar-nav">
             <ul class="navbar-nav">
-                <li class="nav-item" style="margin-right: 20px; width: 100vh;">
+                <li class="nav-item" style="margin-right: 10px; width: 100vh;">
                     <form class="d-flex" role="search">
                         <input class="form-control me-2" type="search" style="background-color:rgb(108, 108, 108);" placeholder="Search" aria-label="Search"/>
                         <button class="btn btn-sm btn-outline-secondary" type="submit" style="">Search</button>
@@ -79,15 +79,24 @@ ob_start();
                 <li class="nav-item">
                     <i class="fa fa-envelope-o" aria-hidden="true"></i>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item" style="display:flex">
                     <div class="image_user">
                         <img src="<?php echo $row['anh_dai_dien']; ?>" style="width: 20px; margin-right: 10px; border-radius: 50%;">
+                    </div>
+                    <div class="dropdown">
+                        <button class="btn btn-secondary dropdown-toggle" style="height:35px" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                         <span><?php echo $username; ?></span>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><button class="dropdown-item" type="button">Trang chủ</button></li>
+                            <li><button class="dropdown-item" type="button">Cài đặt</button></li>
+                            <li><button class="dropdown-item" type="button">Hỗ trợ</button></li>
+                        </ul>
                     </div>
                 </li>
                 <li class="nav-item">
                     <div>
-                        <i class="fa fa-sign-in" aria-hidden="true" style="margin-right: 5px; margin-left: 10px"></i>
+                        <i class="fa fa-sign-in" aria-hidden="true" style="margin-right: 10px; margin-top:12px"></i>
                         <a href="?page_layout=dangxuat" style="color:white; text-decoration:none;">Đăng xuất</a>
                     </div>
                 </li>
@@ -112,7 +121,7 @@ ob_start();
                     </div>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-white" href="#"><i class="fa fa-star" aria-hidden="true" style="margin-right: 10px;"></i>Khen thưởng - Kỷ luật</a>
+                    <a class="nav-link text-white" href="?page_layout=ktkl"><i class="fa fa-star" aria-hidden="true" style="margin-right: 10px;"></i>Khen thưởng - Kỷ luật</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link text-white" href="?page_layout=bangluong"><i class="fa fa-money" aria-hidden="true" style="margin-right: 10px;"></i>Bảng lương</a>
@@ -129,6 +138,9 @@ ob_start();
                         case 'dsnv':
                             include('dsnv.php');
                             break;
+                        case 'ttcn':
+                            include('ttcn.php');
+                            break;
                         case 'themnv':
                             include('themnv.php');
                             break;
@@ -144,11 +156,11 @@ ob_start();
                         case 'bangluong':
                             include('bangluong.php');
                             break;
-                        case 'ttcn':
-                            include('thongtincanhan.php');
-                            break;
                         case 'phongban':
                             include('phongban.php');
+                            break;
+                        case 'ktkl':
+                            include('khenthuong_kyluat.php');
                             break;
                         case 'dangxuat':
                             session_destroy();
@@ -161,7 +173,9 @@ ob_start();
         </div>      
     </div>
     <div class="footer">
-        <p style="color:white">© 2025 Công ty cổ phần dịch vụ và truyền thông Macas</p>
+        <p style="color:white">Nhóm thực hiện: 5
+            <br>Thành viên thực hiện: Nguyễn Đức Khải - Bùi Thế Linh - Nguyễn Hoài Nam
+        </p>
     </div>
 </body>
 

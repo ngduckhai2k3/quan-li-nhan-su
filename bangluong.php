@@ -28,28 +28,24 @@
         ?>
     <div class="container">
         <div class="badge text-bg-secondary text-wrap" style="width: 10rem;font-weight: bold; font-size: 24px; padding:10px;">Bảng lương</div>
-        <div class="data">
+        <div class="data" style="display: flex;">
             <span>Tháng</span>
-            <select>
-                <option>1</option>
-                <option>2</option>
-                <option>3</option>
-                <option>4</option>
-                <option>5</option>
-                <option>6</option>
-                <option>7</option>
-                <option>8</option>
-                <option>9</option>
-                <option>10</option>
-                <option>11</option>
-                <option>12</option>
+            <select name="thang" class="form-select" style="width: 100px; margin-right: 30px;">
+                <?php
+                for ($i = 1; $i <= 12; $i++) {
+                    $selected = ($i == $thang) ? 'selected' : '';
+                    echo "<option value='$i' $selected>$i</option>";
+                }
+                ?>
             </select>
             <span>Năm</span>
-            <select>
-                <option>2023</option>
-                <option>2024</option>
-                <option>2025</option>
-                <option>2026</option>
+            <select name="nam" class="form-select" style="width: 100px;">
+                <?php
+                for ($y = 2023; $y <= 2026; $y++) {
+                    $selected = ($y == $nam) ? 'selected' : '';
+                    echo "<option value='$y' $selected>$y</option>";
+                }
+                ?>
             </select>
         </div>
         <div class="table">

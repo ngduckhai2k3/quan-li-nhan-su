@@ -24,17 +24,20 @@
 <body>
     <?php
     include('connect.php');
+    $thang = isset($_GET['thang']) ? (int)$_GET['thang'] : date('n');
+    $nam = isset($_GET['nam']) ? (int)$_GET['nam'] : date('Y');
     $sql = "SELECT 
         nv.id AS ma_nv,
         nv.ho_ten,
         nv.phong_ban AS phong_ban,
         nv.chuc_vu AS chuc_vu,
+        tinh_cong_thang(nv.id, $thang, $nam) AS cong_thuc_te,
         COUNT(CASE WHEN cc.trang_thai = 'Đi làm' THEN 1 END) AS cong_thuc_te,
         COUNT(CASE WHEN cc.trang_thai = 'Nghỉ có phép' THEN 1 END) AS nghi_phep,
         COUNT(CASE WHEN cc.trang_thai = 'Nghỉ không phép' THEN 1 END) AS nghi_khong_phep
     FROM nhan_vien nv
     LEFT JOIN cham_cong cc ON nv.id = cc.nhan_vien_id 
-        AND MONTH(cc.ngay) = 7 AND YEAR(cc.ngay) = 2025
+        AND MONTH(cc.ngay) = $thang AND YEAR(cc.ngay) = $nam
     GROUP BY nv.id";
 
     $result = $conn->query($sql);
@@ -42,28 +45,26 @@
     <div class="container">
     <div class="badge text-bg-secondary text-wrap" style="width: 15rem;font-weight: bold; font-size: 24px; padding:10px;">Bảng chấm công</div>
     <div class="data">
-        <span>Tháng</span>
-        <select>
-            <option>1</option>
-            <option>2</option>
-            <option>3</option>
-            <option>4</option>
-            <option>5</option>
-            <option>6</option>
-            <option>7</option>
-            <option>8</option>
-            <option>9</option>
-            <option>10</option>
-            <option>11</option>
-            <option>12</option>
-        </select>
-        <span>Năm</span>
-        <select>
-            <option>2023</option>
-            <option>2024</option>
-            <option>2025</option>
-            <option>2026</option>
-        </select>
+        <form method="GET" action="" style="display: flex;">
+            <span>Tháng</span>
+            <select name="thang" class="form-select" style="width: 100px; margin-right: 30px;">
+                <?php
+                for ($i = 1; $i <= 12; $i++) {
+                    $selected = ($i == $thang) ? 'selected' : '';
+                    echo "<option value='$i' $selected>$i</option>";
+                }
+                ?>
+            </select>
+            <span>Năm</span>
+            <select name="nam" class="form-select" style="width: 100px;">
+                <?php
+                for ($y = 2023; $y <= 2026; $y++) {
+                    $selected = ($y == $nam) ? 'selected' : '';
+                    echo "<option value='$y' $selected>$y</option>";
+                }
+                ?>
+            </select>
+        </form>
     </div>
     <div class="table">
     <table class="table table-bordered table-hover" style="border:3px solid #ccc;">
@@ -85,15 +86,15 @@
 
         while ($row = $result->fetch_assoc()) {
             echo "<tr>";
-            echo "<td>" . $stt++ . "</td>";
-            echo "<td>" . $row['ma_nv'] . "</td>";
-            echo "<td>" . $row['ho_ten'] . "</td>";
-            echo "<td>" . $row['phong_ban'] . "</td>";
-            echo "<td>" . $row['chuc_vu'] . "</td>";
-            echo "<td>" . $so_cong_dinh_muc . "</td>";
-            echo "<td>" . $row['nghi_phep'] . "</td>";
-            echo "<td>" . $row['nghi_khong_phep'] . "</td>";
-            echo "<td>" . $row['cong_thuc_te'] . "</td>";
+                echo "<td>" . $stt++ . "</td>";
+                echo "<td>" . $row['ma_nv'] . "</td>";
+                echo "<td>" . $row['ho_ten'] . "</td>";
+                echo "<td>" . $row['phong_ban'] . "</td>";
+                echo "<td>" . $row['chuc_vu'] . "</td>";
+                echo "<td>" . $so_cong_dinh_muc . "</td>";
+                echo "<td>" . $row['nghi_phep'] . "</td>";
+                echo "<td>" . $row['nghi_khong_phep'] . "</td>";
+                echo "<td>" . $row['cong_thuc_te'] . "</td>";
             echo "</tr>";
         }
         ?>
